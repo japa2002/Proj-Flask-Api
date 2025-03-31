@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Animation</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #222;
+            color: white;
+        }
+
+        canvas {
+            background-color: black;
+            display: block;
+            margin: 20px auto;
+            border: 2px solid white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hello, DevOps World!</h1>
+    <canvas id="animationCanvas" width="400" height="200"></canvas>
+
+    <script>
+        const canvas = document.getElementById("animationCanvas");
+        const ctx = canvas.getContext("2d");
+
+        let x = 50, y = 50;
+        let dx = 2, dy = 2;
+        const radius = 10;
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Desenha um círculo vermelho
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2);
+            ctx.fillStyle = "red";
+            ctx.fill();
+            ctx.closePath();
+
+            // Atualiza a posição
+            x += dx;
+            y += dy;
+
+            // Verifica colisão com as bordas
+            if (x + radius > canvas.width || x - radius < 0) {
+                dx *= -1;
+            }
+            if (y + radius > canvas.height || y - radius < 0) {
+                dy *= -1;
+            }
+
+            requestAnimationFrame(animate);  // Chama a função novamente para continuar animando
+        }
+
+        animate();
+    </script>
+</body>
+</html>
